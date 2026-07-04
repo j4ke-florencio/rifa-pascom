@@ -3,55 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafio de Gols PASCOM</title>
+    <title>9º Encontro Nacional PASCOM — Setor Maria Mãe da Igreja</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f2310 0%, #050d06 100%);
-            color: #fff;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: #333;
             padding: 15px;
             min-height: 100vh;
         }
         
-        /* ====== PLACAR PREMIUM RESPONSIVO ====== */
-        header { text-align: center; margin-bottom: 15px; padding: 0 10px; }
-        .placar-header {
-            display: inline-table; background: rgba(0, 0, 0, 0.4); padding: 8px 22px;
-            border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.15); margin-bottom: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); vertical-align: middle;
-        }
-        .placar-wrapper { display: table-cell; vertical-align: middle; text-align: center; }
-        .bandeira-img { width: 28px; height: auto; vertical-align: middle; border-radius: 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); display: inline-block; }
-        .vs { font-weight: 900; color: #f1c40f; font-size: 1.1em; padding: 0 12px; vertical-align: middle; display: inline-block; }
+        header { text-align: center; margin-bottom: 25px; padding: 0 10px; }
+        header h1 { font-size: calc(1.4em + 1vw); color: #0c4a6e; font-weight: 900; text-transform: uppercase; margin-bottom: 6px; }
+        header p { color: #fff; font-weight: bold; background: #0284c7; display: inline-block; padding: 6px 20px; border-radius: 20px; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2); font-size: 0.85em; max-width: 100%; }
 
-        header h1 { font-size: calc(1.4em + 1vw); color: #f1c40f; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); font-weight: 900; text-transform: uppercase; }
-        header p { color: #fff; margin-top: 6px; font-weight: bold; background: #e74c3c; display: inline-block; padding: 5px 18px; border-radius: 20px; box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4); font-size: 0.85em; max-width: 100%; word-wrap: break-word; }
-
-        /* ====== ARENA FLUIDA ====== */
+        /* ====== PAINEL CENTRAL LIMPO ====== */
         .arena-container {
             width: 100%; max-width: 500px; margin: 0 auto 20px; text-align: center;
-            background: rgba(255,255,255,0.05); padding: 15px; border-radius: 18px; border: 2px solid #f1c40f;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            background: #ffffff; padding: 25px 20px; border-radius: 24px; border: 1px solid #bae6fd;
+            box-shadow: 0 10px 25px rgba(2, 132, 199, 0.05);
         }
-        .arena-container h3 { color: #fff; margin-bottom: 10px; font-size: 1em; text-transform: uppercase; letter-spacing: 0.5px; }
+        .arena-container h3 { color: #0c4a6e; margin-bottom: 12px; font-size: 1.1em; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
         
-        /* Torna o canvas responsivo no container */
-        #canvas-arena { 
-            background: #144d18; border: 3px solid #fff; border-radius: 8px; 
-            display: block; margin: 0 auto 15px; box-shadow: inset 0 0 25px rgba(0,0,0,0.7); 
-            width: 100%; height: auto; max-width: 380px; 
-        }
-        .btn-sortear-copa { width: 100%; max-width: 320px; background: linear-gradient(180deg, #f1c40f 0%, #f39c12 100%); color: #000; font-size: 1.1em; font-weight: 900; padding: 14px 20px; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 5px 20px rgba(241, 196, 15, 0.4); transition: 0.2s; text-transform: uppercase; letter-spacing: 0.5px; }
-
         /* ====== LEGENDA ====== */
-        .legenda-copa { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 25px; background: rgba(0,0,0,0.3); padding: 12px; border-radius: 10px; max-width: 630px; margin-left: auto; margin-right: auto; }
-        .legenda-item { display: flex; align-items: center; gap: 6px; font-size: 0.8em; font-weight: bold; }
-        .legenda-cor { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #fff; }
-        .cor-noruega { background: radial-gradient(circle at 35% 35%, #e74c3c, #c0392b); }
-        .cor-brasil-pendente { background: radial-gradient(circle at 35% 35%, #f1c40f, #f39c12); }
-        .cor-brasil-pago { background: radial-gradient(circle at 35% 35%, #2ecc71, #27ae60); }
-        .legenda-item-texto { display: inline-flex; align-items: center; gap: 5px; }
+        .legenda-copa { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 25px; max-width: 630px; margin-left: auto; margin-right: auto; background: rgba(255,255,255,0.5); padding: 12px 20px; border-radius: 12px; border: 1px solid #bae6fd; }
+        .legenda-item { display: flex; align-items: center; gap: 8px; font-size: 0.9em; font-weight: bold; }
+        .legenda-cor { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.15); }
 
         /* ====== GRID ADAPTÁVEL ====== */
         .grid-comprador { 
@@ -60,202 +38,246 @@
             gap: 6px; max-width: 1000px; margin: 0 auto 40px; 
             padding: 0 5px;
         }
-        .bolinha-cell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 0.85em; cursor: pointer; transition: 0.2s; user-select: none; border: 1.5px solid rgba(255,255,255,0.2); box-shadow: inset -2px -2px 5px rgba(0,0,0,0.5), 1px 1px 4px rgba(0,0,0,0.4); }
+        .bolinha-cell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 0.85em; cursor: pointer; transition: 0.2s; user-select: none; border: 1.5px solid rgba(255,255,255,0.2); box-shadow: inset -2px -2px 5px rgba(0,0,0,0.3), 1px 1px 4px rgba(0,0,0,0.15); }
         .bolinha-cell:hover { transform: scale(1.2); z-index: 5; }
-        .bolinha-disponivel { background: radial-gradient(circle at 35% 35%, #e74c3c, #962d22); color: #fff; }
-        .bolinha-pendente { background: radial-gradient(circle at 35% 35%, #f1c40f, #b78a06); color: #000; }
-        .bolinha-pago { background: radial-gradient(circle at 35% 35%, #2ecc71, #1e7e34); color: #fff; cursor: not-allowed; }
+        
+        .bolinha-disponivel { background: radial-gradient(circle at 35% 35%, #e74c3c, #962d22) !important; color: #fff !important; }
+        .bolinha-pendente { background: radial-gradient(circle at 35% 35%, #f1c40f, #b78a06) !important; color: #000 !important; }
+        .bolinha-pago { background: radial-gradient(circle at 35% 35%, #2ecc71, #1e7e34) !important; color: #fff !important; cursor: not-allowed; }
 
-        /* ====== MODAIS ULTRA RESPONSIVOS (O AJUSTE DO SEU PRINT) ====== */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 100; backdrop-filter: blur(5px); padding: 12px; overflow-y: auto; }
+        /* ====== MODAIS ULTRA RESPONSIVOS ====== */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 32, 66, 0.4); justify-content: center; align-items: center; z-index: 100; backdrop-filter: blur(5px); padding: 12px; overflow-y: auto; }
         .modal-overlay.ativo { display: flex; }
         
         .modal-copa {
-            background: #fff; color: #333; padding: 20px; border-radius: 20px; 
+            background: #fff; color: #333; padding: 25px; border-radius: 20px; 
             width: 100%; max-width: 390px; text-align: center;
-            box-shadow: 0 20px 45px rgba(0,0,0,0.6); border: 4px solid #e74c3c;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.15); border: 3px solid #0284c7;
             animation: surgirModal 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            margin: auto; /* Mantém centralizado verticalmente se houver scroll */
+            margin: auto;
         }
         @keyframes surgirModal { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        .img-mascote-modal { width: 80px; height: auto; display: block; margin: 0 auto 5px; object-fit: contain; }
-        .img-taca-modal { width: 70px; height: auto; display: block; margin: 0 auto 10px; object-fit: contain; }
-
-        .modal-copa h2 { font-size: 1.3em; margin-bottom: 2px; color: #c0392b; font-weight: 900; text-transform: uppercase; }
+        .modal-copa h2 { font-size: 1.3em; margin-bottom: 6px; color: #0c4a6e; font-weight: 900; text-transform: uppercase; }
         .modal-copa p.sub-var { font-size: 0.8em; color: #555; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
-        .modal-copa .num-destaque { font-size: 1.4em; font-weight: 900; color: #e67e22; margin-bottom: 12px; background: #fff5eb; display: inline-flex; align-items: center; gap: 8px; padding: 6px 20px; border-radius: 30px; border: 1px solid #fde3cf; justify-content: center; width: 100%; }
+        .modal-copa .num-destaque { font-size: 1.3em; font-weight: 900; color: #0284c7; margin-bottom: 15px; background: #f0f9ff; display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; border-radius: 30px; border: 1px solid #bae6fd; justify-content: center; width: 100%; }
         
-        .pix-container-box { background: #f4faf6; border: 2px dashed #2ecc71; padding: 10px; border-radius: 12px; margin-bottom: 15px; text-align: center; }
-        .pix-container-box p { font-size: 0.8em; color: #333; font-weight: bold; margin-bottom: 6px; }
-        .qr-code-img { width: 120px; height: 120px; display: block; margin: 0 auto 10px; border: 1px solid #ddd; border-radius: 6px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .btn-copia-cola-interno { background: #1b5e20; color: #fff; border: none; padding: 10px 12px; border-radius: 6px; font-size: 0.8em; font-weight: bold; cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; transition: 0.15s; }
-        .btn-copia-cola-interno:hover { background: #123f15; }
+        .pix-container-box { background: #f4faf6; border: 2px dashed #2ecc71; padding: 12px; border-radius: 12px; margin-bottom: 15px; text-align: center; }
+        .pix-container-box p { font-size: 0.85em; color: #333; font-weight: bold; margin-bottom: 8px; }
+        .qr-code-img { width: 130px; height: 130px; display: block; margin: 0 auto 10px; border: 1px solid #ddd; border-radius: 6px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .btn-copia-cola-interno { background: #1e7e34; color: #fff; border: none; padding: 10px 12px; border-radius: 6px; font-size: 0.8em; font-weight: bold; cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; transition: 0.15s; }
+        .btn-copia-cola-interno:hover { background: #145c25; }
 
-        .modal-copa input { width: 100%; padding: 11px; border: 2px solid #ccc; border-radius: 8px; font-size: 15px; margin-bottom: 12px; outline: none; font-weight: 600; color: #333; text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
-        .modal-copa input:focus { border-color: #e74c3c; }
-        .modal-copa label { display: block; text-align: left; font-size: 0.75em; color: #555; margin-bottom: 4px; font-weight: 800; text-transform: uppercase; }
+        .modal-copa input { width: 100%; padding: 11px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 15px; margin-bottom: 12px; outline: none; font-weight: 600; color: #333; text-align: center; }
+        .modal-copa input:focus { border-color: #0284c7; }
+        .modal-copa label { display: block; text-align: left; font-size: 0.75em; color: #475569; margin-bottom: 4px; font-weight: 800; text-transform: uppercase; }
         
         .modal-botoes { display: flex; gap: 10px; margin-top: 5px; }
         .modal-botoes button { flex: 1; padding: 12px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; font-weight: 800; }
-        .btn-reservar { background: #e74c3c; color: #fff; text-transform: uppercase; } 
-        .btn-cancelar { background: #f2f2f2; color: #666; }
+        .btn-reservar { background: #0284c7; color: #fff; text-transform: uppercase; } 
+        .btn-cancelar { background: #f1f5f9; color: #475569; }
         
-        .btn-whatsapp-direto { background: linear-gradient(180deg, #2ecc71 0%, #25d366 100%); color: #fff; font-size: 1.05em; width: 100%; padding: 15px; border: none; border-radius: 10px; cursor: pointer; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); text-transform: uppercase; }
+        .btn-whatsapp-direto { background: linear-gradient(180deg, #2ecc71 0%, #25d366 100%); color: #fff; font-size: 1.05em; width: 100%; padding: 15px; border: none; border-radius: 10px; cursor: pointer; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.2); text-transform: uppercase; }
         
         .modal-sucesso { border: 4px solid #2ecc71 !important; }
         .modal-sucesso h2 { color: #27ae60 !important; font-size: 1.3em; }
         .modal-sucesso p.sub-sucesso { font-size: 0.85em; margin: 10px 0 15px; color: #444; line-height: 1.4; font-weight: 600; }
-        .num-destaque-wrapper { display: inline-flex; align-items: center; gap: 8px; }
 
-        .modal-erro-juiz { border: 5px solid #d63031 !important; background: #fffdfd; }
-        .modal-erro-juiz h2 { color: #d63031 !important; font-size: 1.4em; font-weight: 900; }
-        .icon-cartao { width: 40px; height: 55px; background: #d63031; border-radius: 4px; margin: 10px auto; box-shadow: 0 4px 10px rgba(214, 48, 49, 0.4); border: 2px solid #fff; }
+        .modal-erro-juiz { border: 4px solid #ef4444 !important; }
+        .modal-erro-juiz h2 { color: #b91c1c !important; font-size: 1.3em; font-weight: 900; }
 
-        /* Ajustes finos para celulares muito pequenos (iPhone SE / de tela estreita) */
         @media (max-width: 360px) {
             .modal-copa { padding: 15px; }
-            .modal-copa h2 { font-size: 1.15em; }
-            .qr-code-img { width: 105px; height: 105px; }
             .grid-comprador { grid-template-columns: repeat(auto-fill, minmax(36px, 1fr)); gap: 4px; }
             .bolinha-cell { font-size: 0.75em; }
         }
     </style>
-         
 </head>
 <body>
-
-    <header>
-        <div class="placar-header">
-            <div class="placar-wrapper">
-                <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/br.svg" class="bandeira-img" alt="Brasil">
-                <span class="vs">X</span>
-                <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/no.svg" class="bandeira-img" alt="Noruega">
+    <!-- 🌐 TELA DE SELEÇÃO INICIAL -->
+    <div id="wrapper-selecao" style="display: none; min-height: 100vh; width: 100%; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box;">
+        <div id="secao-selecao-vendedora" style="width: 100%; max-width: 480px; padding: 40px 30px; background: #ffffff; border-radius: 24px; border: 1px solid #bae6fd; text-align: center; box-shadow: 0 10px 30px rgba(2, 132, 199, 0.06); position: relative;">
+            <div style="margin-bottom: 25px;">
+                <span style="background: #e0f2fe; color: #0369a1; font-size: 12px; font-weight: 700; padding: 6px 16px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    📍 Setor Maria Mãe da Igreja
+                </span>
             </div>
-        </div>
-            <h1>Desafio de Gols PASCOM</h1>
-            <p>Suma com as bolas da Noruega antes que o VAR apareça!</p>
 
-            <!-- Botão de Prêmios para destacar na Arena -->
-    <div style="text-align: center; margin: 15px 0;">
-        <button id="btn-abrir-premios" style="background: linear-gradient(135deg, #f1c40f, #f39c12); color: #000; font-weight: bold; padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3); font-size: 14px; transition: 0.2s;">
-            🏆 VER 11 PRÊMIOS DA RODADA
-        </button>
-    </div>
-<div class="modal-overlay" id="modal-premios" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 15px;">
-    <div class="modal" style="background: #fff; width: 100%; max-width: 450px; padding: 30px 25px 25px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 85vh; overflow-y: auto; border-top: 6px solid #f1c40f; position: relative;">
-        <button id="btn-x-premios" style="position: absolute; top: 12px; right: 15px; background: none; border: none; font-size: 22px; color: #7f8c8d; cursor: pointer; font-weight: bold; line-height: 1; transition: color 0.2s; padding: 5px;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='#7f8c8d'">
-            &times;
-        </button>
-
-        <h2 style="color: #2c3e50; font-weight: 800; margin-bottom: 15px; text-align: center; font-size: 1.5rem;">🏆 Lista de Prêmios</h2>
-        <div style="background: #e74c3c; padding: 10px 15px; border-radius: 25px; box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3); margin-bottom: 20px; text-align: center;">
-            <p style="font-size: 13px; color: #ffffff; font-weight: 700; margin: 0; letter-spacing: 0.3px;">
-                Dê o seu chute ao gol e concorra a todas essas premiações!
+            <h2 style="color: #0c4a6e; font-weight: 900; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; font-size: 1.45rem; line-height: 1.3;">
+                9º Encontro Nacional<br><span style="color: #0284c7;">PASCOM</span>
+            </h2>
+            <p style="font-size: 13px; color: #0369a1; font-weight: 700; font-style: italic; margin-bottom: 15px; padding: 0 10px;">
+                "Evangelização em movimento: a dimensão pastoral da comunicação"
             </p>
+
+            <p style="font-size: 14px; color: #475569; margin-bottom: 30px; line-height: 1.6; padding: 0 5px;">
+                Faça parte da nossa missão! 🙏🏼<br>
+                <span style="font-size: 12px; color: #64748b; font-weight: normal; display: inline-block; margin-top: 6px;">
+                    Selecione abaixo a vendedora que te atendeu para escolher seus números da sorte e abrir a nossa Arena Solidária. Cada contribuição ajuda a enviar nossa equipe para buscar formação no Encontro Nacional, fortalecendo a evangelização na nossa comunidade.
+                </span>
+            </p>
+                        
+            <div style="display: flex; flex-direction: column; gap: 12px;" id="lista-botoes-vendedoras"></div>
         </div>
-        <ol style="text-align: left; padding-left: 20px; color: #2c3e50; font-weight: 600; line-height: 2.2; font-size: 15px; margin-bottom: 10px;">
-            <li>🥇 prêmio 1 - R$200,00 no pix</li>
-            <li>🥈 prêmio 2 - R$300,00 no pix</li>
-            <li>🥉 prêmio 3 - Ventilador</li>
-            <li>⚽ prêmio 4 - Fone de Ouvido</li>
-            <li>⚽ prêmio 5 - Mini Caixa de Som</li>
-            <li>⚽ prêmio 6 - Carteira de Crochê</li>
-            <li>⚽ prêmio 7 - Kit com Cruz, Vela, Imagem de Nossa Senhora Aparecida</li>
-            <li>⚽ prêmio 8 - Consulta Nutricional + Bio Impedância - Dra Ammy Coelho</li>
-            <li>⚽ prêmio 9 - Kit Festa Personalizado</li>
-            <li>⚽ prêmio 10 - Bolo Vulcão</li>
-            <li>⚽ prêmio 11 - Liquidificador</li>
-        </ol>
-        <button id="btn-fechar-premios" style="width: 100%; margin-top: 15px; background: #f1f2f6; color: #57606f; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#dfe4ea'" onmouseout="this.style.background='#f1f2f6'">Fechar Lista</button>
-    </div>
-</div>
-    </div>
-    </header>
-    <div class="arena-container">
-        <h3>Transmissão da Arena</h3>
-        <canvas id="canvas-arena" width="380" height="200"></canvas>
-        <button class="btn-sortear-copa" id="btn-sortear-copa">Chutar ao Gol!</button>
+
+        <!-- BLOCO INSTITUCIONAL -->
+        <div style="width: 100%; max-width: 480px; margin-top: 30px; background: rgba(255, 255, 255, 0.6); border: 1px solid #e0f2fe; border-radius: 20px; padding: 25px; box-sizing: border-box;">
+            <h3 style="color: #0c4a6e; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">
+                📖 Por que estamos indo para Aparecida?
+            </h3>
+            <p style="font-size: 12.5px; color: #334155; line-height: 1.6; font-weight: 500; text-align: justify; margin-bottom: 15px;">
+                O encontro nacional da Pascom é um momento formativo crucial para alinhar conhecimentos, reflexões e orientações gerais sobre o nosso agir pastoral. Vamos buscar formações espirituais e conceituais para nos proporcionar comunicar como um mesmo organismo e servir com o mesmo propósito na nossa comunidade.
+            </p>
+
+            <h4 style="color: #0369a1; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px solid #bae6fd; padding-bottom: 4px;">
+                🎓 Grandes Conferências Confirmadas:
+            </h4>
+            
+            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px;">
+                <li style="font-size: 12px; color: #475569; line-height: 1.4;">
+                    🟢 <b>1ª Conf.: Paolo Ruffini</b> (Prefeito do Dicastério para a Comunicação da Santa Sé/Vaticano) — <i>Comunicação em movimento: a dimensão pastoral da comunicação.</i>
+                </li>
+                <li style="font-size: 12px; color: #475569; line-height: 1.4;">
+                    🟢 <b>2ª Conf.: Pe. Josileudo Queiroz</b> (Doutor em Direito Canônico por Roma e Influenciador) — <i>Presença cristã nas redes: postar para engajar ou evangelizar?</i>
+                </li>
+                <li style="font-size: 12px; color: #475569; line-height: 1.4;">
+                    🟢 <b>3ª Conf.: Heloísa Fischer</b> (Referência internacional em Linguagem Simples) — <i>Igreja, comunicação da crise climática e esperança ativa.</i>
+                </li>
+                <li style="font-size: 12px; color: #475569; line-height: 1.4;">
+                    🟢 <b>4ª Conf.: Marcello Zanluchi</b> (Pesquisador e Assessor de Imprensa da Santa Sé na JMJ) — <i>Além do “like”: A gestualidade do encontro.</i>
+                </li>
+            </ul>
+        </div>
     </div>
 
-    <div class="legenda-copa">
-        <div class="legenda-item">
-            <div class="legenda-cor cor-noruega"></div> 
-            <span class="legenda-item-texto">Livres (<img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/no.svg" style="width:16px; border-radius:2px;" alt="Noruega"> Noruega)</span>
-        </div>
-        <div class="legenda-item"><div class="legenda-cor cor-brasil-pendente"></div> Checando VAR (🟡)</div>
-        <div class="legenda-item">
-            <div class="legenda-cor cor-brasil-pago"></div> 
-            <span class="legenda-item-texto">GOL DO BRASIL! (<img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/br.svg" style="width:16px; border-radius:2px;" alt="Brasil"> 🟢)</span>
-        </div>
-    </div>
+    <!-- 🏟️ CONTEÚDO DA ARENA DE RIFA -->
+    <div id="conteudo-arena-jogo" style="display: none; padding-top: 15px;">
+        <header>
+            <h1>Rifa Digital PASCOM</h1>
+            <p>Escolha seus números da sorte e garanta sua participação!</p>
 
-    <div class="grid-comprador" id="grid-comprador"></div>
-
-    <!-- MODAL CHECAGEM DO VAR -->
-    <div class="modal-overlay" id="modal-reserva">
-        <div class="modal-copa">
-            <!-- 🛠️ CORREÇÃO: Extensão alterada para .png transparente -->
-            <img src="mascote.png" class="img-mascote-modal" alt="Mascote Rifa">
-            
-            <h2>Lance em Checagem!</h2>
-            <p class="sub-var">O VAR está revisando o lance. Garanta o gol fazendo o pagamento!</p>
-            
-            <div class="num-destaque" id="modal-num-texto">
-                <div class="num-destaque-wrapper">
-                    <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/br.svg" style="width:25px; border-radius:2px; vertical-align:middle;" alt="Brasil"> 
-                    <span id="modal-num-val">Número: 0</span>
-                </div>
-            </div>
-            
-            <div class="pix-container-box">
-                <p>Pagamento para vendedora <span id="label-vendedora-nome">Jakeline</span>:</p>
-                <img src="" id="elemento-qr-code" class="qr-code-img" alt="QR Code Pix">
-                
-                <button type="button" class="btn-copia-cola-interno" id="btn-copiar-pix-auto">
-                    Copiar Código Pix Copia e Cola
+            <div style="text-align: center; margin: 15px 0;">
+                <button id="btn-abrir-premios" style="background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff; font-weight: bold; padding: 12px 24px; border: none; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.2); font-size: 14px;">
+                    🏆 VER 11 PRÊMIOS DO SORTEIO (DIA 12/07)
                 </button>
             </div>
 
-            <label>Seu Nome Completo</label>
-            <input type="text" id="modal-cliente-nome" placeholder="Ex: Vinícius Júnior">
-            
-            <label>Seu WhatsApp (Para validação)</label>
-            <input type="tel" id="modal-cliente-fone" placeholder="(92) 99999-9999" maxlength="15">
+            <div class="modal-overlay" id="modal-premios" style="z-index: 2000;">
+                <div class="modal" style="background: #fff; width: 100%; max-width: 450px; padding: 30px 25px 25px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-height: 85vh; overflow-y: auto; border-top: 6px solid #0284c7; position: relative; margin: auto;">
+                    <button id="btn-x-premios" style="position: absolute; top: 12px; right: 15px; background: none; border: none; font-size: 22px; color: #7f8c8d; cursor: pointer; font-weight: bold;">&times;</button>
+                    <h2 style="color: #0c4a6e; font-weight: 800; margin-bottom: 15px; text-align: center;">🏆 Lista de Prêmios</h2>
+                    <div style="background: #0284c7; padding: 10px 15px; border-radius: 25px; margin-bottom: 20px; text-align: center;"><p style="font-size: 13px; color: #fff; font-weight: 700; margin: 0;">Participe e concorra a todas essas premiações incríveis!</p></div>
+                    <ol style="text-align: left; padding-left: 20px; color: #334155; font-weight: 600; line-height: 2.2; font-size: 15px;">
+                        <li>🥇 prêmio 1 - R$200,00 no pix</li>
+                        <li>🥈 prêmio 2 - R$300,00 no pix</li>
+                        <li>🥉 prêmio 3 - Ventilador</li>
+                        <li>⚽ prêmio 4 - Fone de Ouvido</li>
+                        <li>⚽ prêmio 5 - Mini Caixa de Som</li>
+                        <li>⚽ prêmio 6 - Carteira de Crochê</li>
+                        <li>⚽ prêmio 7 - Kit com Cruz, Vela, Imagem de Nossa Senhora Aparecida</li>
+                        <li>⚽ prêmio 8 - Consulta Nutricional + Bio Impedância - Dra Ammy Coelho</li>
+                        <li>⚽ prêmio 9 - Kit Festa Personalizado</li>
+                        <li>⚽ prêmio 10 - Bolo Vulcão</li>
+                        <li>⚽ prêmio 11 - Liquidificador</li>
+                    </ol>
+                    <button id="btn-fechar-premios" style="width: 100%; margin-top: 15px; background: #f1f5f9; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: #475569;">Fechar Lista</button>
+                </div>
+            </div>
+        </header>
 
-            <div class="modal-botoes">
-                <button class="btn-cancelar" onclick="document.getElementById('modal-reserva').classList.remove('ativo')">Recuar</button>
-                <button class="btn-reservar" id="btn-salvar-reserva">Validar Chute!</button>
+        <div class="arena-container">
+            <h3>Sorteio Solidário Pascom</h3>
+            <p style="font-size: 14px; color: #475569; font-weight: 600; line-height: 1.5; margin-bottom: 10px;">
+                O grande sorteio acontecerá no dia <b>12 de julho de 2026</b>.
+            </p>
+            
+            <div style="background: #f0f9ff; border: 1px dashed #0284c7; padding: 10px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px; justify-content: center; width: 100%;">
+                <span style="font-size: 14px;">📸</span>
+                <p style="font-size: 12px; color: #0369a1; font-weight: 700; margin: 0; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Sorteio AO VIVO com transmissão oficial no nosso Instagram!
+                </p>
+            </div>
+            
+            <p style="font-size: 12px; color: #64748b; font-weight: 500; margin-top: 12px;">
+                Clique diretamente nas bolinhas abaixo para reservar o seu número!
+            </p>
+        </div>
+
+        <div class="legenda-copa">
+            <div class="legenda-item">
+                <div class="legenda-cor" style="background: radial-gradient(circle at 35% 35%, #e74c3c, #962d22);"></div> 
+                <span style="color: #0c4a6e;">Disponíveis</span>
+            </div>
+            <div class="legenda-item">
+                <div class="legenda-cor" style="background: radial-gradient(circle at 35% 35%, #f1c40f, #b78a06);"></div> 
+                <span style="color: #0c4a6e;">Reservados (Aguardando Pix)</span>
+            </div>
+            <div class="legenda-item">
+                <div class="legenda-cor" style="background: radial-gradient(circle at 35% 35%, #2ecc71, #1e7e34);"></div> 
+                <span style="color: #0c4a6e;">Confirmados</span>
+        </div>
+    </div>
+
+        <div class="grid-comprador" id="grid-comprador"></div>
+
+        <div class="modal-overlay" id="modal-reserva">
+            <div class="modal-copa">
+                <h2>Reservar Número</h2>
+                <p class="sub-var">Preencha os dados e realize o pagamento para garantir a sua participação!</p>
+                <div class="num-destaque" id="modal-num-texto"><span id="modal-num-val">Número: 0</span></div>
+                
+                <div class="pix-container-box">
+                    <p>Pagamento para vendedora <span id="label-vendedora-nome">Jakeline</span>:</p>
+                    <img src="" id="elemento-qr-code" class="qr-code-img" alt="QR Code Pix">
+                    <button type="button" class="btn-copia-cola-interno" id="btn-copiar-pix-auto">Copiar Código Pix</button>
+                </div>
+                
+                <label>Seu Nome Completo</label><input type="text" id="modal-cliente-nome" placeholder="Ex: Maria Silva">
+                <label>Seu WhatsApp</label><input type="tel" id="modal-cliente-fone" placeholder="(92) 99999-9999" maxlength="15">
+                
+                <div class="modal-botoes">
+                    <button class="btn-cancelar" onclick="document.getElementById('modal-reserva').classList.remove('ativo')">Voltar</button>
+                    <button class="btn-reservar" id="btn-salvar-reserva">Confirmar Reserva!</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DE COMPROVANTE -->
+        <div class="modal-overlay" id="modal-comprovante-cliente">
+            <div class="modal-copa modal-sucesso">
+                <h2>Reserva Solicitada! 🎉</h2>
+                <p class="sub-sucesso">
+                    Para validar seus números na tabela oficial, clique no botão abaixo e envie o seu comprovante Pix agora mesmo para o nosso controle!
+                </p>
+                <button class="btn-whatsapp-direto" id="btn-enviar-wa-direto">Enviar Comprovante para <span id="btn-vendedora-nome">Jakeline</span></button>
+            </div>
+        </div>    
+
+        <!-- MODAL DE ERRO -->
+        <div class="modal-overlay" id="modal-erro-validacao">
+            <div class="modal-copa modal-erro-juiz">
+                <h2>Dados Incompletos!</h2>
+                <p id="texto-erro-juiz" style="font-weight:600; color:#475569; font-size:14px; margin: 15px 0; line-height: 1.4;"></p>
+                <button class="btn-reservar" style="width:100%; background:#475569;" onclick="document.getElementById('modal-erro-validacao').classList.remove('ativo')">Corrigir Dados</button>
             </div>
         </div>
     </div>
-    <!-- MODAL FINAL -->
-    <div class="modal-overlay" id="modal-comprovante-cliente">
-        <div class="modal-copa modal-sucesso">
-            <!-- 🛠️ CORREÇÃO: Extensão alterada para .png transparente -->
-            <img src="taca.png" class="img-taca-modal" alt="Troféu Copa">
-            
-            <h2>Golaço Confirmado! <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/br.svg" style="width:22px; border-radius:2px; vertical-align:middle;" alt="Brasil"></h2>
-            <p class="sub-sucesso">
-                O chute balançou a rede da Noruega! Para o **VAR confirmar o Gol**, clique no botão abaixo e envie o comprovante Pix agora mesmo.
-            </p>
-            <button class="btn-whatsapp-direto" id="btn-enviar-wa-direto">
-                Enviar para <span id="btn-vendedora-nome">Jakeline</span>
-            </button>
-        </div>
-    </div>    
-    <!-- MODAL DE ERRO -->
-    <div class="modal-overlay" id="modal-erro-validacao">
-        <div class="modal-copa modal-erro-juiz">
-            <h2>Lance Impedido!</h2>
-            <div class="icon-cartao"></div>
-            <p style="font-size: 14px; margin: 10px 0 15px; color: #333; line-height: 1.4; font-weight: bold;" id="texto-erro-juiz">
-                O juiz parou o lance! Preencha seus dados corretamente para validar o chute.
-            </p>
-            <button class="btn-reservar" style="width:100%; background:#333;" onclick="document.getElementById('modal-erro-validacao').classList.remove('ativo')">Voltar pro Jogo</button>
-        </div>
-    </div>
+    <footer style="margin: 60px auto 20px; max-width: 630px; text-align: center; padding: 24px 10px; border-top: 1px solid #e2e8f0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <p style="font-size: 11px; color: #64748b; font-weight: 500; letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase;">
+            © 2026 PASCOM — Desenvolvido por <span style="color: #0284c7; font-weight: 700;">Jakeline Florêncio</span>
+        </p>
+        <p style="font-size: 12px; color: #64748b; font-weight: 500; margin: 0;">
+            Suporte técnico: 
+            <a href="https://wa.me/5592985993444?text=Olá,%20Jakeline!%20Preciso%20de%20suporte%20com%20o%20sistema%20da%20Rifa%20PASCOM." 
+            target="_blank" 
+            style="color: #0369a1; font-weight: 600; text-decoration: none; transition: all 0.2s ease;"
+            onmouseover="this.style.color='#0284c7'; this.style.textDecoration='underline'" 
+            onmouseout="this.style.color='#0369a1'; this.style.textDecoration='none'">
+            Contato via WhatsApp
+            </a>
+        </p>
+    </footer>
 
     <script type="module" src="comprador.js"></script>
 </body>
