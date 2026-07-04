@@ -375,6 +375,7 @@ window.renderizarLista = function() {
     }); 
 }
 
+
 // Ouvintes de Eventos Atualizados e Vinculados
 document.getElementById('input-busca').oninput = () => { renderizarGrid(); renderizarLista(); };
 document.getElementById('filtro-vendedora').onchange = () => { renderizarGrid(); renderizarLista(); };
