@@ -203,3 +203,25 @@ document.getElementById('btn-salvar-reserva').onclick = function() {
 document.getElementById('btn-enviar-wa-direto').onclick = function() {
     if (urlWhatsAppGerada) { window.open(urlWhatsAppGerada, '_blank'); document.getElementById('modal-comprovante-cliente').classList.remove('ativo'); }
 };
+
+// ====== ATIVAÇÃO DO MODAL DE 11 PRÊMIOS DA RODADA ======
+
+// 1. Abre o modal de prêmios ao clicar no botão dourado
+document.getElementById('btn-abrir-premios').onclick = () => {
+    document.getElementById('modal-premios').style.display = 'flex';
+};
+
+// 2. Fecha o modal de prêmios ao clicar no botão cinza de fechar
+document.getElementById('btn-fechar-premios').onclick = () => {
+    document.getElementById('modal-premios').style.display = 'none';
+};
+
+// 3. Fecha automaticamente se o usuário clicar no fundo escurecido desfocado
+document.getElementById('modal-premios').onclick = (e) => {
+    if (e.target.id === 'modal-premios') {
+        document.getElementById('modal-premios').style.display = 'none';
+    }
+};
+document.getElementById('btn-x-premios').onclick = () => {
+    document.getElementById('modal-premios').style.display = 'none';
+};

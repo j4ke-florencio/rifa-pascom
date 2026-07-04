@@ -134,10 +134,45 @@
                 <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/no.svg" class="bandeira-img" alt="Noruega">
             </div>
         </div>
-        <h1>Desafio de Gols PASCOM</h1>
-        <p>Suma com as bolas da Noruega antes que o VAR apareça!</p>
-    </header>
+            <h1>Desafio de Gols PASCOM</h1>
+            <p>Suma com as bolas da Noruega antes que o VAR apareça!</p>
 
+            <!-- Botão de Prêmios para destacar na Arena -->
+    <div style="text-align: center; margin: 15px 0;">
+        <button id="btn-abrir-premios" style="background: linear-gradient(135deg, #f1c40f, #f39c12); color: #000; font-weight: bold; padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3); font-size: 14px; transition: 0.2s;">
+            🏆 VER 11 PRÊMIOS DA RODADA
+        </button>
+    </div>
+<div class="modal-overlay" id="modal-premios" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 15px;">
+    <div class="modal" style="background: #fff; width: 100%; max-width: 450px; padding: 30px 25px 25px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 85vh; overflow-y: auto; border-top: 6px solid #f1c40f; position: relative;">
+        <button id="btn-x-premios" style="position: absolute; top: 12px; right: 15px; background: none; border: none; font-size: 22px; color: #7f8c8d; cursor: pointer; font-weight: bold; line-height: 1; transition: color 0.2s; padding: 5px;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='#7f8c8d'">
+            &times;
+        </button>
+
+        <h2 style="color: #2c3e50; font-weight: 800; margin-bottom: 15px; text-align: center; font-size: 1.5rem;">🏆 Lista de Prêmios</h2>
+        <div style="background: #e74c3c; padding: 10px 15px; border-radius: 25px; box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3); margin-bottom: 20px; text-align: center;">
+            <p style="font-size: 13px; color: #ffffff; font-weight: 700; margin: 0; letter-spacing: 0.3px;">
+                Dê o seu chute ao gol e concorra a todas essas premiações!
+            </p>
+        </div>
+        <ol style="text-align: left; padding-left: 20px; color: #2c3e50; font-weight: 600; line-height: 2.2; font-size: 15px; margin-bottom: 10px;">
+            <li>🥇 prêmio 1 - R$200,00 no pix</li>
+            <li>🥈 prêmio 2 - R$300,00 no pix</li>
+            <li>🥉 prêmio 3 - Ventilador</li>
+            <li>⚽ prêmio 4 - Fone de Ouvido</li>
+            <li>⚽ prêmio 5 - Mini Caixa de Som</li>
+            <li>⚽ prêmio 6 - Carteira de Crochê</li>
+            <li>⚽ prêmio 7 - Kit com Cruz, Vela, Imagem de Nossa Senhora Aparecida</li>
+            <li>⚽ prêmio 8 - Consulta Nutricional + Bio Impedância - Dra Ammy Coelho</li>
+            <li>⚽ prêmio 9 - Kit Festa Personalizado</li>
+            <li>⚽ prêmio 10 - Bolo Vulcão</li>
+            <li>⚽ prêmio 11 - Liquidificador</li>
+        </ol>
+        <button id="btn-fechar-premios" style="width: 100%; margin-top: 15px; background: #f1f2f6; color: #57606f; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#dfe4ea'" onmouseout="this.style.background='#f1f2f6'">Fechar Lista</button>
+    </div>
+</div>
+    </div>
+    </header>
     <div class="arena-container">
         <h3>Transmissão da Arena</h3>
         <canvas id="canvas-arena" width="380" height="200"></canvas>
