@@ -1,0 +1,367 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    padding: 20px;
+}
+header { text-align: center; margin-bottom: 30px; }
+header h1 { font-size: 2em; color: #2c3e50; }
+header p { color: #7f8c8d; margin-top: 5px; }
+
+/* ====== CONTROLES ====== */
+.controles {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    justify-content: center; margin-bottom: 20px;
+}
+.controles-grupo {
+    display: flex; align-items: center; gap: 5px;
+    background: #eef1f4; padding: 2px 8px; border-radius: 8px;
+}
+.controles-grupo label { font-size: 12px; font-weight: bold; color: #555; }
+.controles input, .controles button, .controles select {
+    padding: 10px 15px; border: 1px solid #ddd;
+    border-radius: 8px; font-size: 14px; outline: none;
+}
+.controles input:focus, .controles select:focus { border-color: #3498db; }
+.controles button {
+    background: #3498db; color: #fff; cursor: pointer;
+    border: none; transition: 0.2s; font-weight: 500;
+}
+.controles button:hover { background: #2980b9; }
+.controles button.danger { background: #e74c3c; color: #fff; }
+.controles button.danger:hover { background: #c0392b; }
+.controles button.success { background: #27ae60; color: #fff; }
+.controles button.success:hover { background: #229954; }
+.controles button.share { background: #f39c12; color: #fff; }
+.controles button.share:hover { background: #d35400; }
+
+.controles button.roleta {
+    background: #8e44ad; color: #fff; font-weight: bold;
+    animation: pulsar 2s infinite;
+}
+.controles button.roleta:hover { background: #713391; }
+
+@keyframes pulsar {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(142, 68, 173, 0.4); }
+    70% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(142, 68, 173, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(142, 68, 173, 0); }
+}
+
+.numero-cell.roleta-foco {
+    background: #f1c40f !important;
+    color: #000 !important;
+    transform: scale(1.25) !important;
+    border-color: #f39c12 !important;
+    z-index: 10;
+}
+
+/* ====== ESTATÍSTICAS ====== */
+.stats {
+    display: flex; gap: 15px; justify-content: center;
+    margin-bottom: 20px; flex-wrap: wrap;
+}
+.stat-card {
+    background: #fff; padding: 15px 25px; border-radius: 10px;
+    text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    min-width: 130px; flex: 1; max-width: 180px;
+}
+.stat-card .numero { font-size: 1.6em; font-weight: bold; }
+.stat-card .label { font-size: 0.85em; color: #7f8c8d; margin-top: 3px; }
+.stat-card.vendidos .numero { color: #27ae60; }
+.stat-card.disponiveis .numero { color: #e67e22; }
+.stat-card.total .numero { color: #3498db; }
+.stat-card.arrecadado .numero { color: #8e44ad; }
+.stat-card.jakeline .numero { color: #e84393; }
+.stat-card.singridy .numero { color: #6c5ce7; }
+.stat-card.rayssa .numero { color: #e67e22; }
+.stat-card.ana .numero { color: #1abc9c; }
+
+/* ====== LEGENDA ====== */
+.legenda {
+    display: flex; gap: 20px; justify-content: center;
+    margin-bottom: 25px; flex-wrap: wrap;
+}
+.legenda-item {
+    display: flex; align-items: center; gap: 6px; font-size: 0.85em;
+}
+.legenda-cor {
+    width: 16px; height: 16px; border-radius: 4px;
+}
+
+/* ====== GRID DE NÚMEROS ====== */
+.grid-rifa {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+    gap: 6px; max-width: 1200px; margin: 0 auto 30px;
+}
+.numero-cell {
+    aspect-ratio: 1; display: flex; align-items: center;
+    justify-content: center; border: 2px solid #bdc3c7;
+    border-radius: 6px; font-weight: bold; font-size: 0.85em;
+    cursor: pointer; background: #fff; transition: 0.15s;
+    position: relative; user-select: none;
+}
+.numero-cell:hover {
+    border-color: #3498db; transform: scale(1.15); z-index: 2;
+}
+.numero-cell.vendido-jakeline { background: #e84393; color: #fff; border-color: #d63384; }
+.numero-cell.vendido-singridy { background: #6c5ce7; color: #fff; border-color: #5b4bc4; }
+.numero-cell.vendido-rayssa { background: #e67e22; color: #fff; border-color: #d35400; }
+.numero-cell.vendido-ana { background: #1abc9c; color: #fff; border-color: #16a085; }
+
+.numero-cell.vendido-jakeline::after,
+.numero-cell.vendido-singridy::after,
+.numero-cell.vendido-rayssa::after,
+.numero-cell.vendido-ana::after {
+    content: "✓"; position: absolute; font-size: 1.2em; opacity: 0.35;
+}
+
+.numero-cell:hover .tooltip { display: block; }
+.tooltip {
+    display: none; position: absolute; bottom: 115%; left: 50%;
+    transform: translateX(-50%); background: #2c3e50; color: #fff;
+    padding: 6px 10px; border-radius: 5px; font-size: 0.75em;
+    white-space: nowrap; z-index: 10; font-weight: normal;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* ====== MODAL ====== */
+.modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5); justify-content: center;
+    align-items: center; z-index: 100;
+}
+.modal-overlay.ativo { display: flex; }
+.modal {
+    background: #fff; padding: 25px; border-radius: 12px;
+    width: 90%; max-width: 400px; text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.modal h2 { margin-bottom: 5px; color: #2c3e50; }
+.modal .num-info {
+    font-size: 1.5em; font-weight: bold; color: #3498db; margin-bottom: 15px;
+}
+.modal input, .modal select {
+    width: 100%; padding: 12px; border: 2px solid #ddd;
+    border-radius: 8px; font-size: 16px; margin-bottom: 12px; outline: none;
+}
+.modal input:focus, .modal select:focus { border-color: #3498db; }
+.modal label {
+    display: block; text-align: left; font-size: 0.85em;
+    color: #7f8c8d; margin-bottom: 5px; margin-left: 2px;
+}
+.modal-botoes { display: flex; gap: 10px; }
+.modal-botoes button {
+    flex: 1; padding: 12px; border: none; border-radius: 8px;
+    font-size: 15px; cursor: pointer; font-weight: bold;
+}
+.btn-confirmar { background: #27ae60; color: #fff; }
+.btn-confirmar:hover { background: #229954; }
+.btn-cancelar { background: #ecf0f1; color: #333; }
+.btn-cancelar:hover { background: #d5dbdb; }
+.btn-remover { background: #e74c3c; color: #fff; width: 100%; }
+.btn-remover:hover { background: #c0392b; }
+
+/* ====== LISTA ====== */
+.secao-lista { max-width: 1200px; margin: 0 auto; }
+.secao-lista h2 {
+    color: #2c3e50; margin-bottom: 15px;
+    border-bottom: 2px solid #3498db; padding-bottom: 8px;
+}
+.tabela-wrapper { overflow-x: auto; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.tabela-compradores {
+    width: 100%; border-collapse: collapse; background: #fff;
+}
+.tabela-compradores th {
+    background: #3498db; color: #fff; padding: 12px; text-align: left; font-size: 0.9em;
+}
+.tabela-compradores td {
+    padding: 10px 12px; border-bottom: 1px solid #ecf0f1; font-size: 0.9em;
+}
+.tabela-compradores tr:hover { background: #f8f9fa; }
+.tabela-compradores .acao-remover {
+    color: #e74c3c; cursor: pointer; font-weight: bold;
+}
+.badge-vendedora {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 0.8em; font-weight: bold; color: #fff;
+}
+.badge-jakeline { background: #e84393; }
+.badge-singridy { background: #6c5ce7; }
+.badge-rayssa { background: #e67e22; }
+.badge-ana { background: #1abc9c; }
+.sem-registros { text-align: center; color: #95a5a6; padding: 30px; }
+
+/* ====== 🖨️ CSS DE IMPRESSÃO ====== */
+@media print {
+    @page { size: A4 portrait; margin: 0.8cm 0.5cm; }
+    .controles, .stats, .secao-lista, .modal-overlay, .legenda, header p { display: none !important; }
+    body { padding: 0 !important; margin: 0 !important; background: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+    header { margin-bottom: 10px !important; }
+    header h1 { font-size: 1.3em !important; color: #000 !important; }
+    .grid-rifa { display: grid !important; grid-template-columns: repeat(20, minmax(22px, 1fr)) !important; gap: 3px !important; max-width: 100% !important; margin: 0 auto !important; page-break-inside: avoid !important; }
+    .numero-cell { aspect-ratio: 1 !important; border: 1px solid #000 !important; font-size: 8px !important; font-weight: bold !important; color: #000 !important; background: #fff !important; border-radius: 3px !important; }
+    .numero-cell.vendido-jakeline::after, .numero-cell.vendido-singridy::after, .numero-cell.vendido-rayssa::after, .numero-cell.vendido-ana::after { display: none !important; }
+    .numero-cell.vendido-jakeline { background: #e0e0e0 !important; border-color: #000 !important; }
+    .numero-cell.vendido-singridy { background: #c5c5c5 !important; border-color: #000 !important; }
+    .numero-cell.vendido-rayssa { background: #aaaaaa !important; border-color: #000 !important; }
+    .numero-cell.vendido-ana { background: #959595 !important; border-color: #000 !important; }
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(5px); /* Desfoque de fundo elegante estilo iOS */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.ativo {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Caixa do Modal */
+.modal {
+    background: #ffffff;
+    width: 90%;
+    max-width: 500px;
+    padding: 28px;
+    border-radius: 16px; /* Cantos arredondados modernos */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+    box-sizing: border-box;
+}
+
+.modal-overlay.ativo .modal {
+    transform: translateY(0);
+}
+
+/* Títulos internos */
+.modal h2 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+    color: #2c3e50;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Informações de destaque (Ex: Número da Rifa) */
+.num-info {
+    font-size: 1.15rem;
+    font-weight: 700;
+    background: #f1f2f6;
+    color: #2f3542;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-left: 5px solid #2196F3;
+}
+
+/* Labels elegantes */
+.modal label {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #57606f;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Inputs, Selects e Textareas totalmente modernizados */
+.modal input[type="text"],
+.modal input[type="number"],
+.modal select,
+.modal textarea {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    border: 1.5px solid #ced6e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #2f3542;
+    background-color: #ffffff;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+/* Efeito de Foco nos Inputs */
+.modal input:focus,
+.modal select:focus,
+.modal textarea:focus {
+    border-color: #2196F3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.15);
+}
+
+/* Grupo de botões lado a lado */
+.modal-botoes {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* Botões Base */
+.modal button {
+    flex: 1;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Botão Confirmar (Verde / Azul) */
+.btn-confirmar {
+    background-color: #2ed573;
+    color: white;
+}
+
+.btn-confirmar:hover {
+    background-color: #26af5f;
+    transform: translateY(-1px);
+}
+
+/* Botão Cancelar / Fechar (Cinza Neutro) */
+.btn-cancelar {
+    background-color: #f1f2f6;
+    color: #57606f;
+}
+
+.btn-cancelar:hover {
+    background-color: #dfe4ea;
+    color: #2f3542;
+}
+
+/* Botão Remover Compra (Abaixo ou Destacado em Vermelho) */
+.btn-remover {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff4757;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-remover:hover {
+    background-color: #ff6b81;
+    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.2);
+}

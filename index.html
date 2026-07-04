@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Sistema de Rifa PASCOM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>🎯 Sistema de Rifa PASCOM</h1>
+        <p>Clique em um número para registrar a venda</p>
+    </header>
+
+    <div class="stats">
+        <div class="stat-card total"><div class="numero" id="stat-total">540</div><div class="label">Total de Números</div></div>
+        <div class="stat-card vendidos"><div class="numero" id="stat-vendidos">0</div><div class="label">Vendidos</div></div>
+        <div class="stat-card disponiveis"><div class="numero" id="stat-disponiveis">540</div><div class="label">Disponíveis</div></div>
+        <div class="stat-card arrecadado"><div class="numero" id="stat-arrecadado">R$ 0,00</div><div class="label">Arrecadado</div></div>
+        <div class="stat-card jakeline"><div class="numero" id="stat-jakeline">0</div><div class="label">Jakeline</div></div>
+        <div class="stat-card singridy"><div class="numero" id="stat-singridy">0</div><div class="label">Singridy</div></div>
+        <div class="stat-card rayssa"><div class="numero" id="stat-rayssa">0</div><div class="label">Rayssa</div></div>
+        <div class="stat-card ana"><div class="numero" id="stat-ana">0</div><div class="label">Ana</div></div>
+    </div>
+
+    <div class="legenda">
+        <div class="legenda-item"><div class="legenda-cor" style="background:#e84393;"></div> Jakeline</div>
+        <div class="legenda-item"><div class="legenda-cor" style="background:#6c5ce7;"></div> Singridy</div>
+        <div class="legenda-item"><div class="legenda-cor" style="background:#e67e22;"></div> Rayssa</div>
+        <div class="legenda-item"><div class="legenda-cor" style="background:#1abc9c;"></div> Ana</div>
+        <div class="legenda-item"><div class="legenda-cor" style="background:#fff; border:2px solid #bdc3c7;"></div> Disponível</div>
+    </div>
+
+    <div class="controles">
+        <div class="controles-grupo"><label>Nºs:</label><input type="number" id="input-qtd" value="540" style="width: 80px; padding: 6px;"></div>
+        <div class="controles-grupo"><label>Preço R$:</label><input type="number" id="input-preco" value="10" style="width: 70px; padding: 6px;"></div>
+        <button id="btn-atualizar-config">🔄 Atualizar Config.</button>
+        <input type="text" id="input-busca" placeholder="🔍 Buscar comprador ou nº..." style="min-width: 240px;">
+        <select id="filtro-vendedora">
+            <option value="">Todas as vendedoras</option>
+            <option value="Jakeline">Jakeline</option>
+            <option value="Singridy">Singridy</option>
+            <option value="Rayssa">Rayssa</option>
+            <option value="Ana">Ana</option>
+        </select>
+        <select id="filtro-status" style="padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-weight: 600;">
+        <option value="">Todos os status</option>
+        <option value="disponivel">Disponíveis (Noruega)</option>
+        <option value="var">Apenas no VAR (🟡 Pendentes)</option>
+        <option value="pago">Apenas Pagos (🟢 Confirmados)</option>
+        </select>
+        <button class="share" onclick="compartilharStatus('disponiveis')">📋 Copiar Disponíveis</button>
+        <button class="share" onclick="compartilharStatus('vendidos')">✅ Copiar Vendidos</button>
+        <button onclick="window.print()">🖨️ Imprimir</button>
+    </div>
+
+    <div class="grid-rifa" id="grid-rifa"></div>
+
+    <div class="secao-lista">
+        <h2>📋 Compradores Registrados</h2>
+        <div class="tabela-wrapper">
+            <table class="tabela-compradores">
+                <thead>
+                    <tr><th>Número</th><th>Comprador</th><th>Vendedora</th><th>Data/Hora</th><th>Ação</th></tr>
+                </thead>
+                <tbody id="lista-compradores"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <h2>Registrar Venda</h2>
+            <div class="num-info" id="modal-numero">Número: 0</div>
+            
+            <label>Nome do comprador</label>
+            <input type="text" id="modal-nome" placeholder="Ex: Maria Silva" list="lista-sugestoes-nomes" autocomplete="off">
+            <datalist id="lista-sugestoes-nomes"></datalist>
+            
+            <label>Vendedora</label>
+            <select id="modal-vendedora">
+                <option value="Jakeline">Jakeline</option>
+                <option value="Singridy">Singridy</option>
+                <option value="Rayssa">Rayssa</option>
+                <option value="Ana">Ana</option>
+            </select>
+            
+            <label>Adicionar outros números junto (opcional)</label>
+            <input type="text" id="modal-lote" placeholder="Ex: 95, 96 (separe por vírgula)">
+            
+            <div class="modal-botoes">
+                <button class="btn-cancelar" id="btn-fechar-modal">Cancelar</button>
+                <button class="btn-confirmar" id="btn-confirmar-venda">✓ Confirmar</button>
+            </div>
+            
+            <div id="btn-remover-wrapper" style="margin-top: 12px; display: none;">
+                <button class="btn-remover" id="btn-remover-venda">✗ Remover Compra</button>
+            </div>
+        </div> 
+    </div>
+
+    <div class="modal-overlay" id="modal-comprovante">
+        <div class="modal" style="border-top: 5px solid #27ae60;">
+            <h2 style="color: #27ae60;">🎉 Venda Confirmada!</h2>
+            <textarea id="texto-comprovante" readonly style="width:100%; height:130px; padding:10px; font-family:monospace; font-size:12px; border:1px solid #ddd; border-radius:8px; resize:none; margin-bottom:15px; outline:none; background:#f9f9f9;"></textarea>
+            <div class="modal-botoes">
+                <button class="btn-confirmar" onclick="copiarComprovanteText()">📋 Copiar</button>
+                <button class="btn-cancelar" onclick="document.getElementById('modal-comprovante').classList.remove('ativo')">Fechar</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal-confirmacao-custom">
+        <div class="modal" style="max-width: 380px;">
+            <h2 style="color: #e74c3c;">⚠️ Confirmar Remoção</h2>
+            <div class="num-info" id="confirm-numero-texto">Remover a venda do número?</div>
+            <p style="font-size: 14px; color: #57606f; margin-bottom: 20px; font-weight: 500;">
+                Esta ação devolverá o número para a lista de disponíveis instantaneamente.
+            </p>
+            <div class="modal-botoes">
+                <button class="btn-cancelar" id="btn-cancelar-remocao">Cancelar</button>
+                <button class="btn-remover" id="btn-confirmar-remocao-item" style="flex: 1;">Remover</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
