@@ -35,9 +35,22 @@ let vendedoraAtual = params.get('v');
 
 function iniciarArenaParaVendedora(nomeVendedora) {
     vendedoraAtual = nomeVendedora.charAt(0).toUpperCase() + nomeVendedora.slice(1).toLowerCase();
+    
+    if (vendedoraAtual === "Jakeline") {
+        const blocoTopo = document.getElementById('bloco-paroquial-topo');
+        if (blocoTopo) {
+            blocoTopo.style.display = "block";
+        }
+    } else {
+        const blocoTopo = document.getElementById('bloco-paroquial-topo');
+        if (blocoTopo) {
+            blocoTopo.style.display = "none";
+        }
+    }
+
     document.getElementById('wrapper-selecao').style.display = 'none';
     document.getElementById('conteudo-arena-jogo').style.display = 'block';
-    
+        
     onValue(dbRef, (snapshot) => {
         const dados = snapshot.val();
         if (dados) {
