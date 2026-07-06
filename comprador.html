@@ -18,19 +18,16 @@
         header h1 { font-size: calc(1.4em + 1vw); color: #0c4a6e; font-weight: 900; text-transform: uppercase; margin-bottom: 6px; }
         header p { color: #fff; font-weight: bold; background: #0284c7; display: inline-block; padding: 6px 20px; border-radius: 20px; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2); font-size: 0.85em; max-width: 100%; }
 
-        /* ====== ARENA CONTAINER ====== */
         .arena-container {
             width: 100%; max-width: 550px; margin: 0 auto 20px; text-align: center;
             background: #ffffff; padding: 25px 20px; border-radius: 24px; border: 1px solid #bae6fd;
             box-shadow: 0 10px 25px rgba(2, 132, 199, 0.05);
         }
         
-        /* ====== LEGENDA ====== */
         .legenda-copa { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 25px; max-width: 630px; margin-left: auto; margin-right: auto; background: rgba(255,255,255,0.5); padding: 12px 20px; border-radius: 12px; border: 1px solid #bae6fd; }
         .legenda-item { display: flex; align-items: center; gap: 8px; font-size: 0.9em; font-weight: bold; }
         .legenda-cor { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.15); }
 
-        /* ====== GRID ADAPTÁVEL ====== */
         .grid-comprador { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); 
@@ -44,7 +41,6 @@
         .bolinha-pendente { background: radial-gradient(circle at 35% 35%, #f1c40f, #b78a06) !important; color: #000 !important; }
         .bolinha-pago { background: radial-gradient(circle at 35% 35%, #2ecc71, #1e7e34) !important; color: #fff !important; cursor: not-allowed; }
 
-        /* ====== MODAIS ULTRA RESPONSIVOS ====== */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 32, 66, 0.4); justify-content: center; align-items: center; z-index: 100; backdrop-filter: blur(5px); padding: 12px; overflow-y: auto; }
         .modal-overlay.ativo { display: flex; }
         
@@ -93,7 +89,6 @@
     </style>
 </head>
 <body>
-    <!-- 🌐 TELA DE SELEÇÃO INICIAL -->
     <div id="wrapper-selecao" style="display: none; min-height: 100vh; width: 100%; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box;">
         <div id="secao-selecao-vendedora" style="width: 100%; max-width: 480px; padding: 40px 30px; background: #ffffff; border-radius: 24px; border: 1px solid #bae6fd; text-align: center; box-shadow: 0 10px 30px rgba(2, 132, 199, 0.06); position: relative;">
             <div style="margin-bottom: 25px; display: flex; flex-direction: column; gap: 8px; align-items: center;">
@@ -120,7 +115,6 @@
             <div style="display: flex; flex-direction: column; gap: 12px;" id="lista-botoes-vendedoras"></div>
         </div>
 
-        <!-- BLOCO INSTITUCIONAL COMPLETO -->
         <div style="width: 100%; max-width: 480px; margin-top: 30px; background: rgba(255, 255, 255, 0.6); border: 1px solid #e0f2fe; border-radius: 20px; padding: 25px; box-sizing: border-box;">
             <h3 style="color: #0c4a6e; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">
                 📖 Por que estamos indo para Aparecida?
@@ -150,7 +144,6 @@
         </div>
     </div>
 
-    <!-- 🏟️ CONTEÚDO DA ARENA DE RIFA (Tudo contido com segurança dentro de display:none) -->
     <div id="conteudo-arena-jogo" style="display: none; padding-top: 15px;">
         
         <header>
@@ -186,9 +179,7 @@
             </div>
         </header>
 
-        <!-- ⛪ PAINEL DE INFORMAÇÕES INTEGRADO -->
         <div class="arena-container">
-            <!-- 🖥️ REFACTOR DE PRIVACIDADE: O seu bloco paroquial nasce com display: none e só o JS ativa se for o seu link -->
             <div id="bloco-paroquial-topo" style="display: none; border-bottom: 1px dashed #bae6fd; padding-bottom: 15px; margin-bottom: 15px; text-align: justify;">
                 <div style="text-align: center; margin-bottom: 10px;">
                     <span style="background: #e0f2fe; color: #0369a1; font-size: 11px; font-weight: 800; padding: 6px 16px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;">
@@ -222,7 +213,6 @@
             </p>
         </div>
 
-        <!-- 🏷️ CORREÇÃO: Legenda movida para dentro do wrapper correto para sumir na tela de seleção -->
         <div class="legenda-copa">
             <div class="legenda-item">
                 <div class="legenda-cor" style="background: radial-gradient(circle at 35% 35%, #e74c3c, #962d22);"></div> 
@@ -246,6 +236,12 @@
                 <p class="sub-var">Preencha os dados e realize o pagamento para garantir a sua participação!</p>
                 <div class="num-destaque" id="modal-num-texto"><span id="modal-num-val">Número: 0</span></div>
                 
+                <div style="margin-bottom: 15px; background: #f8fafc; padding: 10px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                    <label style="display: block; text-align: center; font-size: 0.8em; color: #475569; font-weight: 800; margin-bottom: 6px;">QUANTIDADE DE RIFAS</label>
+                    <input type="number" id="modal-qtd-rifas" value="1" min="1" max="20" style="width: 80px; text-align: center; font-size: 1.1em; padding: 6px; margin-bottom: 0; display: inline-block;">
+                    <p id="modal-total-calculado" style="font-size: 0.85em; color: #0369a1; font-weight: bold; margin-top: 6px;">Total: R$ 10,00</p>
+                </div>
+
                 <div class="pix-container-box">
                     <p>Pagamento para a <span id="label-vendedora-nome">Jakeline</span>:</p>
                     <img src="" id="elemento-qr-code" class="qr-code-img" alt="QR Code Pix">
@@ -262,7 +258,6 @@
             </div>
         </div>
 
-        <!-- MODAL DE COMPROVANTE -->
         <div class="modal-overlay" id="modal-comprovante-cliente">
             <div class="modal-copa modal-sucesso">
                 <h2>Reserva Solicitada! 🎉</h2>

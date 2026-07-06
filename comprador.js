@@ -130,9 +130,21 @@ function renderizarGridPublico() {
 
 function abrirModalReserva(numero) {
     numeroEscolhidoNaRoleta = numero;
-    document.getElementById('modal-num-val').textContent = `Número Escolhido: ${numero}`;
+    document.getElementById('modal-num-val').textContent = `Número Inicial: ${numero}`;
     document.getElementById('modal-cliente-nome').value = '';
     document.getElementById('modal-cliente-fone').value = '';
+    
+    const inputQtd = document.getElementById('modal-qtd-rifas');
+    inputQtd.value = 1;
+    document.getElementById('modal-total-calculado').textContent = `Total: R$ ${precoNumero.toFixed(2).replace('.', ',')}`;
+
+    inputQtd.oninput = function() {
+        let qtd = parseInt(inputQtd.value) || 1;
+        if (qtd < 1) qtd = 1;
+        let total = qtd * precoNumero;
+        document.getElementById('modal-total-calculado').textContent = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
+    };
+
     document.getElementById('label-vendedora-nome').textContent = vendedoraAtual;
     document.getElementById('elemento-qr-code').src = configVendedoras[vendedoraAtual].pathQrCode;
 
@@ -154,17 +166,40 @@ function dispararErroJuiz(mensagem) {
 document.getElementById('btn-salvar-reserva').onclick = function() {
     const nome = document.getElementById('modal-cliente-nome').value.trim();
     const fone = document.getElementById('modal-cliente-fone').value.trim();
+    const qtdDesejada = parseInt(document.getElementById('modal-qtd-rifas').value) || 1;
 
     if (!nome) { dispararErroJuiz('⚠️ Nome obrigatório! Por favor, preencha o seu nome completo para realizar a reserva.'); return; }
     if (fone.length < 14) { dispararErroJuiz('⚠️ WhatsApp inválido! Insira um número válido com DDD para podermos validar sua participação.'); return; }
 
     const agora = new Date();
     const dataHoraStr = agora.toLocaleDateString('pt-BR') + ' ' + agora.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
-    vendas[numeroEscolhidoNaRoleta] = { nome: nome, fone: fone, vendedora: vendedoraAtual, data: dataHoraStr, status: "pendente" };
+    
+    let numerosParaReservar = [];
+    let numAtual = numeroEscolhidoNaRoleta;
+
+    while (numerosParaReservar.length < qtdDesejada && numAtual <= totalNumeros) {
+        if (!vendas[numAtual] || (vendas[numAtual] && String(vendas[numAtual].status).toLowerCase().trim() !== 'pago' && String(vendas[numAtual].status).toLowerCase().trim() !== 'pendente')) {
+            numerosParaReservar.push(numAtual);
+        }
+        numAtual++;
+    }
+    if (numerosParaReservar.length < qtdDesejada) {
+        dispararErroJuiz(`⚠️ Não há ${qtdDesejada} números disponíveis em sequência a partir do número ${numeroEscolhidoNaRoleta}. Escolha outra bolinha inicial.`);
+        return;
+    }
+
+    numerosParaReservar.forEach(num => {
+        vendas[num] = { nome: nome, fone: fone, vendedora: vendedoraAtual, data: dataHoraStr, status: "pendente" };
+    });
     
     set(dbRef, { totalNumeros, precoNumero, vendas }).then(() => {
         document.getElementById('modal-reserva').classList.remove('ativo');
-        const textoComp = `⛪ *RIFA SOLIDÁRIA PASCOM - SETOR MARIA MÃE DA IGREJA*\n\n📌 *Reserva Realizada:* Número *${numeroEscolhidoNaRoleta}*\n👤 *Comprador(a):* ${nome}\n📞 *Contato:* ${fone}\n💵 *Valor:* R$ ${precoNumero.toFixed(2).replace('.', ',')}\n🙋‍♀️ *Vendedora:* ${vendedoraAtual}\n\n*Estou enviando o comprovante Pix para validar a minha participação!* ❤️✨`;
+        
+        let totalValor = qtdDesejada * precoNumero;
+        let listaNumerosStr = numerosParaReservar.join(', ');
+
+        const textoComp = `⛪ *RIFA SOLIDÁRIA PASCOM - SETOR MARIA MÃE DA IGREJA*\n\n📌 *Reserva Realizada:* Números *[ ${listaNumerosStr} ]* (${qtdDesejada} rifas)\n👤 *Comprador(a):* ${nome}\n📞 *Contato:* ${fone}\n💵 *Valor Total:* R$ ${totalValor.toFixed(2).replace('.', ',')}\n🙋‍♀️ *Vendedora:* ${vendedoraAtual}\n\n*Estou enviando o comprovante Pix para validar a minha participação!* ❤️✨`;
+        
         urlWhatsAppGerada = `https://wa.me/${configVendedoras[vendedoraAtual].foneWhatsApp}?text=${encodeURIComponent(textoComp)}`;
         document.getElementById('btn-vendedora-nome').textContent = vendedoraAtual;
         document.getElementById('modal-comprovante-cliente').classList.add('ativo');
